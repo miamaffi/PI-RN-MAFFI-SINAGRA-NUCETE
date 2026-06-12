@@ -19,7 +19,7 @@ export default function Login({ navigation }) {
     }
     auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        navigation.navigate("Home");
+        navigation.navigate("NavegacionTab");
       })
       .catch(() => {
         setError("Credenciales incorrectas");
