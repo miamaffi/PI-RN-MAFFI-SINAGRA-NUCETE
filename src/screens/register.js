@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
-import { db, auth } from '../../config/firebase';
+import { db, auth } from '../config/firebase';
 
 export default function Register({ navigation }) {
   const [email, setEmail] = useState("");
