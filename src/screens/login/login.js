@@ -10,7 +10,7 @@ export default function Login({ navigation }) {
   const onSubmit = () => {
     setError("");
     if (!email.includes("@")) {
-      setError("Email mal formateado");
+      setError("Formato de correo incorrecto.");
       return;
     }
     if (password.length < 6) {
@@ -19,7 +19,7 @@ export default function Login({ navigation }) {
     }
     auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        navigation.replace("Main");
+        navigation.navigate("Home");
       })
       .catch(() => {
         setError("Credenciales incorrectas");
