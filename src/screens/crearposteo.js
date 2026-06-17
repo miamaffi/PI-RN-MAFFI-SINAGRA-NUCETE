@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { db, auth } from '../config/firebase';
-import camara from '../components/camara'
+import Camara from '../components/camara'
 
 function CrearPost({ navigation }) {
   const [titulo, setTitulo] = useState('');
   const [descripcion, setDescripcion] = useState('');
+  const [photoUri, setPhotoUri] = useState(null)
 
   function guardarPost() {
     if (titulo === '' || descripcion === '') {
@@ -18,6 +19,7 @@ function CrearPost({ navigation }) {
       descripcion: descripcion,
       autor: auth.currentUser.email,
       fecha: Date.now(),
+      photo: photoUri,
     })
       .then(() => {
         navigation.goBack();
@@ -29,36 +31,44 @@ function CrearPost({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.volver}>← Volver</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitulo}>Crear Post</Text>
-      </View>
+      {
+        photoUri === null ?
+        <Camara setPhotoUri={(uri) => setPhotoUri(uri)}/>
 
-      <View style={styles.form}>
-        <Text style={styles.label}>Título</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Ingresá un título"
-          value={titulo}
-          onChangeText={(text) => setTitulo(text)}
-        />
+        :
+        <>
+              <View style={styles.header}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                  <Text style={styles.volver}>← Volver</Text>
+                </TouchableOpacity>
+                <Text style={styles.headerTitulo}>Crear Post</Text>
+              </View>
 
-        <Text style={styles.label}>Descripción</Text>
-        <TextInput
-          style={[styles.input, styles.inputMultiline]}
-          placeholder="Ingresá una descripción"
-          value={descripcion}
-          onChangeText={(text) => setDescripcion(text)}
-          multiline={true}
-          numberOfLines={4}
-        />
+              <View style={styles.form}>
+                <Text style={styles.label}>Título</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Ingresá un título"
+                  value={titulo}
+                  onChangeText={(text) => setTitulo(text)}
+                />
 
-        <TouchableOpacity style={styles.boton} onPress={guardarPost}>
-          <Text style={styles.botonTexto}>Publicar</Text>
-        </TouchableOpacity>
-      </View>
+                <Text style={styles.label}>Descripción</Text>
+                <TextInput
+                  style={[styles.input, styles.inputMultiline]}
+                  placeholder="Ingresá una descripción"
+                  value={descripcion}
+                  onChangeText={(text) => setDescripcion(text)}
+                  multiline={true}
+                  numberOfLines={4}
+                />
+
+                <TouchableOpacity style={styles.boton} onPress={guardarPost}>
+                  <Text style={styles.botonTexto}>Publicar</Text>
+                </TouchableOpacity>
+              </View>
+        </>
+      }
     </View>
   );
 }

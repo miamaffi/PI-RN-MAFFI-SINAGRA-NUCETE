@@ -8,7 +8,7 @@ export default function Home() {
 
   useEffect(() => {
     const unsubscribe = db.collection("posts")
-      .orderBy("createdAt", "desc")
+      .orderBy("fecha", "desc")
       .onSnapshot((snapshot) => {
         const lista = snapshot.docs.map((doc) => ({
           id: doc.id,

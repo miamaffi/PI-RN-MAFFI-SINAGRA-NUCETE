@@ -5,7 +5,7 @@ export default function Post({ post }) {
     <View style={styles.post}>
       <Text style={styles.email}>{post.data.email}</Text>
       <Text style={styles.descripcion}>{post.data.descripcion}</Text>
-      <Text style={styles.likes}>{post.data.likes.length} likes</Text>
+      <Text style={styles.likes}>{post.data.likes} likes</Text>
     </View>
   );
 }
