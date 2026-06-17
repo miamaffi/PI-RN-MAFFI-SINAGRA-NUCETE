@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { db, auth } from '../config/firebase';
 import Camara from '../components/camara'
 
@@ -7,12 +7,15 @@ function CrearPost({ navigation }) {
   const [titulo, setTitulo] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [photoUri, setPhotoUri] = useState(null)
+  const [mensajeError, setMensajeError] = useState("")
 
-  function guardarPost() {
-    if (titulo === '' || descripcion === '') {
-      Alert.alert('Error', 'Por favor completá todos los campos.');
-      return;
-    }
+    function guardarPost() {
+      if (titulo === "") {
+        setMensajeError("Por favor completa el titulo, gracias")
+        return
+      }
+
+      setMensajeError("")
 
     db.collection('posts').add({
       titulo: titulo,
@@ -20,12 +23,17 @@ function CrearPost({ navigation }) {
       autor: auth.currentUser.email,
       fecha: Date.now(),
       photo: photoUri,
+      likes: [],
     })
       .then(() => {
+        setTitulo('')
+        setDescripcion('')
+        setPhotoUri(null)
+        setMensajeError("")
         navigation.goBack();
       })
       .catch((error) => {
-        Alert.alert('Error', error.message);
+        setMensajeError(error.message)
       });
   }
 
@@ -38,22 +46,24 @@ function CrearPost({ navigation }) {
         :
         <>
               <View style={styles.header}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Pressable onPress={() => navigation.goBack()}>
                   <Text style={styles.volver}>← Volver</Text>
-                </TouchableOpacity>
+                </Pressable>
                 <Text style={styles.headerTitulo}>Crear Post</Text>
               </View>
 
               <View style={styles.form}>
-                <Text style={styles.label}>Título</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Ingresá un título"
-                  value={titulo}
-                  onChangeText={(text) => setTitulo(text)}
-                />
+              <Text style={styles.label}>
+               Título <Text style={styles.requerido}>*</Text>
+             </Text>
+             <TextInput
+             style={styles.input}
+             placeholder="Ingresá un título"
+            value={titulo}
+            onChangeText={(text) => setTitulo(text)}
+  />
 
-                <Text style={styles.label}>Descripción</Text>
+                <Text style={styles.label}>Descripción (opcional)</Text>
                 <TextInput
                   style={[styles.input, styles.inputMultiline]}
                   placeholder="Ingresá una descripción"
@@ -62,10 +72,10 @@ function CrearPost({ navigation }) {
                   multiline={true}
                   numberOfLines={4}
                 />
-
-                <TouchableOpacity style={styles.boton} onPress={guardarPost}>
+                <Text>{mensajeError}</Text>
+                <Pressable style={styles.boton} onPress={guardarPost}>
                   <Text style={styles.botonTexto}>Publicar</Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
         </>
       }
@@ -105,6 +115,9 @@ const styles = StyleSheet.create({
     color: '#1e293b',
     marginBottom: 6,
     marginTop: 16,
+  },
+  requerido: {
+    color: 'red',
   },
   input: {
     backgroundColor: '#fff',

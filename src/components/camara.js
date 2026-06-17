@@ -14,6 +14,11 @@ function Camara(props) {
       .catch(error => console.log(error));
   }, []);
 
+  useEffect( ()=>{
+    return () => setPreview(null)
+
+  },[])
+
   function takePicture() {
     metodosCamara.current.takePictureAsync()
       .then((imgTemp) => {
@@ -27,7 +32,6 @@ function Camara(props) {
 
   function aceptarFoto() {
     props.setPhotoUri(preview);
-    setPreview(null);
   }
 
   function rechazarFoto() {
