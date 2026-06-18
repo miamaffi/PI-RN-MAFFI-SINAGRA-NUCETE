@@ -33,7 +33,11 @@ export default function Post({ post, navigation }) {
           source={{ uri: `data:image/jpeg;base64,${post.data.photo}` }}
         />
       ) : null}
+
+      <Text style={styles.titulo}>{post.data.titulo}</Text>
       <Text style={styles.descripcion}>{post.data.descripcion}</Text>
+
+      <View style={styles.acciones}>
       <Pressable onPress={darLike}>
         <Text style={yaLikeo ? styles.meGustaActivo : styles.meGusta}>Me gusta</Text>
       </Pressable>
@@ -44,6 +48,7 @@ export default function Post({ post, navigation }) {
           <Text style={styles.comentar}>Comentar</Text>
         </Pressable>
       ) : null}
+      </View>
 
       {/* Muestro la cantidad de likes (el largo del array) */}
       <Text style={styles.likes}>{likes.length} likes</Text>
@@ -52,12 +57,69 @@ export default function Post({ post, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  post: { width: '100%', maxWidth: 470, alignSelf: 'center', backgroundColor: '#fff', borderWidth: 1, borderColor: '#e2e8f0', borderRadius: 8, marginBottom: 16, overflow: 'hidden' },
-  email: { fontWeight: 'bold', padding: 10 },
-  imagen: { width: '100%', aspectRatio: 1, backgroundColor: '#f0f0f0' },
-  descripcion: { fontSize: 14, paddingHorizontal: 10, marginTop: 4 },
-  meGusta: { fontSize: 14, fontWeight: '600', color: '#64748b', paddingHorizontal: 10, marginTop: 6 },
-  meGustaActivo: { fontSize: 14, fontWeight: '600', color: '#e74c3c', paddingHorizontal: 10, marginTop: 6 },
-  comentar: { fontSize: 14, fontWeight: '600', color: '#3b82f6', paddingHorizontal: 10, marginTop: 6 },
-  likes: { fontWeight: '600', fontSize: 13, padding: 10 },
+  post: {
+    width: '90%',
+    maxWidth: 400,
+    alignSelf: 'center',
+    backgroundColor: '#f5f0e8',
+    padding: 12,
+    paddingBottom: 20,
+    marginBottom: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+    elevation: 8,
+  },
+  email: {
+    fontWeight: 'bold',
+    paddingVertical: 6,
+    color: '#1a1a1a',
+    fontSize: 12,
+  },
+  imagen: {
+    width: '100%',
+    aspectRatio: 1,
+    backgroundColor: '#ddd',
+  },
+  titulo: {
+    color: '#1a1a1a',
+    fontWeight: 'bold',
+    fontSize: 22,
+    marginTop: 12,
+    textAlign: 'center',
+  },
+  descripcion: {
+    fontSize: 11,
+    marginTop: 4,
+    color: '#555',
+    textAlign: 'center',
+  },
+  acciones: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 12,
+  },
+  meGusta: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#aaa',
+  },
+  meGustaActivo: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#e74c3c',
+  },
+  comentar: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#aaa',
+  },
+  likes: {
+    fontWeight: '600',
+    fontSize: 12,
+    color: '#555',
+    marginTop: 6,
+    textAlign: 'center',
+  },
 });

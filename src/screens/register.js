@@ -27,10 +27,14 @@ export default function Register({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.logoContainer}>
+        <Text style={styles.logo}>Se<Text style={styles.logoAcento}>REAL</Text></Text>
+        <Text style={styles.logoSub}>sin filtros. sin edición. real.</Text>
+      </View>
       <Text style={styles.title}>Registro</Text>
-      <TextInput style={styles.field} keyboardType="email-address" placeholder="Email" onChangeText={setEmail} value={email} />
-      <TextInput style={styles.field} placeholder="Nombre de usuario" onChangeText={setUsername} value={username} />
-      <TextInput style={styles.field} placeholder="Contraseña" secureTextEntry onChangeText={setPassword} value={password} />
+      <TextInput style={styles.field} keyboardType="email-address" placeholder="Email" placeholderTextColor="#555" onChangeText={setEmail} value={email} />
+      <TextInput style={styles.field} placeholder="Nombre de usuario" placeholderTextColor="#555" onChangeText={setUsername} value={username} />
+      <TextInput style={styles.field} placeholder="Contraseña" placeholderTextColor="#555" secureTextEntry onChangeText={setPassword} value={password} />
       {error ? <Text style={styles.error}>{error}</Text> : null}
       <Pressable style={styles.button} onPress={onSubmit}>
         <Text style={styles.buttonText}>Registrate</Text>
@@ -43,11 +47,65 @@ export default function Register({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, paddingHorizontal: 20, marginTop: 40, backgroundColor: '#fff' },
-  title: { fontSize: 24, fontWeight: "bold", marginBottom: 20, textAlign: "center" },
-  field: { paddingVertical: 12, paddingHorizontal: 10, borderWidth: 1, borderColor: "#ccc", borderRadius: 6, marginVertical: 8, fontSize: 16 },
-  button: { backgroundColor: "#28a745", paddingVertical: 12, alignItems: "center", borderRadius: 6, marginTop: 10 },
-  buttonText: { color: "#fff", fontSize: 16, fontWeight: "600" },
-  error: { color: "red", textAlign: "center", marginVertical: 8 },
-  link: { color: '#28a745', textAlign: 'center', marginTop: 15 },
+  container: {
+    flex: 1,
+    backgroundColor: '#0a0a0a',
+    paddingHorizontal: 24,
+    justifyContent: 'center',
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 48,
+  },
+  logo: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    color: '#fff',
+    letterSpacing: 2,
+  },
+  logoAcento: {
+    color: '#f5e642',
+  },
+  logoSub: {
+    color: '#fff',
+    fontSize: 13,
+    marginTop: 6,
+    letterSpacing: 1,
+  },
+  field: {
+    backgroundColor: '#1a1a1a',
+    color: '#fff',
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderRadius: 4,
+    marginVertical: 8,
+    fontSize: 15,
+    borderWidth: 1,
+    borderColor: '#2a2a2a',
+  },
+  button: {
+    backgroundColor: '#f5e642',
+    paddingVertical: 14,
+    alignItems: 'center',
+    borderRadius: 4,
+    marginTop: 16,
+  },
+  buttonText: {
+    color: '#0a0a0a',
+    fontSize: 15,
+    fontWeight: 'bold',
+    letterSpacing: 1,
+  },
+  error: {
+    color: '#ff4444',
+    textAlign: 'center',
+    marginVertical: 8,
+    fontSize: 13,
+  },
+  link: {
+    color: '#fff',
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 13,
+  },
 });

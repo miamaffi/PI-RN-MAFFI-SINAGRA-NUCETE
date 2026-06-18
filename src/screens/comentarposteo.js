@@ -70,6 +70,7 @@ export default function ComentarPosteo({ route, navigation }) {
         <TextInput
           style={styles.input}
           placeholder="Escribí un comentario..."
+          placeholderTextColor="#555"
           value={comentario}
           onChangeText={setComentario}
         />
@@ -82,14 +83,81 @@ export default function ComentarPosteo({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff', padding: 16, paddingTop: 50 },
-  volver: { color: '#3b82f6', fontSize: 16, marginBottom: 10 },
-  titulo: { fontSize: 22, fontWeight: 'bold', marginBottom: 16 },
-  comentario: { borderBottomWidth: 1, borderBottomColor: '#eee', paddingVertical: 10 },
-  autorComentario: { fontWeight: 'bold', fontSize: 13, color: '#555' },
-  textoComentario: { fontSize: 15, marginTop: 2 },
-  inputRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 10 },
-  input: { flex: 1, borderWidth: 1, borderColor: '#ccc', borderRadius: 6, paddingHorizontal: 12, paddingVertical: 10 },
-  boton: { backgroundColor: '#3b82f6', paddingVertical: 10, paddingHorizontal: 16, borderRadius: 6 },
-  botonTexto: { color: '#fff', fontWeight: '600' },
+  container: {
+    flex: 1,
+    backgroundColor: '#0a0a0a',
+    padding: 16,
+    paddingTop: 50,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#1a1a1a',
+    paddingBottom: 12,
+  },
+  logo: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff',
+    letterSpacing: 2,
+  },
+  logoAcento: {
+    color: '#f5e642',
+  },
+  volver: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  titulo: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 16,
+    letterSpacing: 1,
+  },
+  comentario: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#1a1a1a',
+    paddingVertical: 10,
+  },
+  autorComentario: {
+    fontWeight: 'bold',
+    fontSize: 13,
+    color: '#f5e642',
+  },
+  textoComentario: {
+    fontSize: 14,
+    marginTop: 2,
+    color: '#fff',
+  },
+  inputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    paddingVertical: 10,
+  },
+  input: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#2a2a2a',
+    borderRadius: 4,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    backgroundColor: '#1a1a1a',
+    color: '#fff',
+  },
+  boton: {
+    backgroundColor: '#f5e642',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 4,
+  },
+  botonTexto: {
+    color: '#0a0a0a',
+    fontWeight: 'bold',
+    letterSpacing: 1,
+  },
 });
