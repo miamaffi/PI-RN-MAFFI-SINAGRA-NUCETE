@@ -3,7 +3,7 @@ import { View, FlatList, StyleSheet } from "react-native";
 import { db } from '../config/firebase';
 import Post from '../components/post';
 
-export default function Home() {
+export default function Home({ navigation }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function Home() {
       <FlatList
         data={posts}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Post post={item} />}
+        renderItem={({ item }) => <Post post={item} navigation={navigation} />}
       />
     </View>
   );
