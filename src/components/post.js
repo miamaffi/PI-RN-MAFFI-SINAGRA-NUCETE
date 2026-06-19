@@ -5,10 +5,20 @@ import firebase from 'firebase';
 // El Post recibe por props el posteo a mostrar y el navigation que es para el botón de comentar
 export default function Post({ post, navigation }) {
   const email = auth.currentUser.email;
+
   // Agarro el array de likes del posteo. Si no existe, uso uno vacío para que no rompa
-  const likes = post.data.likes || [];
+  let likes = [];
+  if (post.data.likes) {
+    likes = post.data.likes;
+  }
+
   // Chequeo si yo ya likeé este posteo (si mi email está en el array de likes)
-  const yaLikeo = likes.includes(email);
+  let yaLikeo = false;
+  likes.forEach((likeEmail) => {
+    if (likeEmail === email) {
+      yaLikeo = true;
+    }
+  });
 
   function darLike() {
     // Si ya lo había likeado, saco mi email del array (quito el like)

@@ -10,6 +10,24 @@ export default function Register({ navigation }) {
 
   const onSubmit = () => {
     setError("");
+
+    if (!email.includes("@")) {
+      setError("Formato de correo incorrecto.");
+      return;
+    }
+    if (username === "") {
+      setError("Tenés que escribir un nombre de usuario.");
+      return;
+    }
+    if (password === "") {
+      setError("Tenés que escribir una contraseña.");
+      return;
+    }
+    if (password.length < 6) {
+      setError("La contraseña debe tener una longitud mínima de 6 caracteres");
+      return;
+    }
+
     auth.createUserWithEmailAndPassword(email, password)
       .then(() => {
         db.collection("users").add({

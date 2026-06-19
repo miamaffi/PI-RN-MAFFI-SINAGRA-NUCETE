@@ -30,7 +30,7 @@ function CrearPost({ navigation }) {
         setDescripcion('')
         setPhotoUri(null)
         setMensajeError("")
-        navigation.goBack();
+        navigation.navigate("Home");
       })
       .catch((error) => {
         setMensajeError(error.message)
